@@ -129,21 +129,21 @@ Drive materiale</button>    </div>
 <script>
   // Funzione per caricare gli annunci dal Google Sheet
   function loadAnnouncements() {
-    const sheetID = '1CVO2duETKyGbWOwSv3dK-414A-jnCHQCBuMajgCc01Y'; // Inserisci l'ID del tuo foglio
-    const range = 'Foglio1!B9:B11'; // Il range di celle da cui prendere i dati
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRkAkMNSYfpydySDk1MMH38vv4NMYqu4iQcNhQ9AOtsBgCC4rP9ep2lR4RG8zNQrACGLRxFED307k3l/pub?output=csv';
     
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/${range}?key=AIzaSyBwtQ2A0fyHiygMA-cVaT_kpMQHLVygbmQ`;
-
     // Esegui la richiesta GET
-    fetch(url)
-      .then(response => response.json())
+    fetch(csvUrl)
+      .then(response => response.text())
       .then(data => {
-        const announcements = data.values; // Ottieni i dati
+        const rows = data.split('\n').slice(8, 11); // Estrai le righe da B9 a B11
         let announcementsHTML = '';
 
-        // Cicla attraverso i dati e crea il contenuto HTML
-        announcements.forEach(announcement => {
-          announcementsHTML += `<p>${announcement}</p>`;
+        // Cicla attraverso le righe e crea il contenuto HTML
+        rows.forEach(row => {
+          const columns = row.split(',');
+          if (columns[1]) { // Controlla che la colonna B abbia un valore
+            announcementsHTML += `<div class="alert alert-primary" role="alert">${columns[1]}</div>`;
+          }
         });
 
         // Inserisci gli annunci nel div con id "announcements"
@@ -155,3 +155,4 @@ Drive materiale</button>    </div>
   // Carica gli annunci quando la pagina è pronta
   window.onload = loadAnnouncements;
 </script>
+
