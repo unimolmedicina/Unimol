@@ -5,25 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Materiale M&C</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-<!-- Icons -->
-<link href="./assets/css/nucleo-icons.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
-<!-- Theme dCSS -->
-<link type="text/css" href="./assets/css/material-kit-pro.min.css" rel="stylesheet">       
+  <!-- Font system per uno stile Apple-like -->
+  <style>
+    /* Font e colori di base */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f5f7;
+      color: #1d1d1f;
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar minimalista */
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 0.5rem 1rem;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    .nav-link {
+      font-size: 1rem;
+      margin-right: 1rem;
+      color: #0071e3;
+    }
+    .nav-link.active {
+      font-weight: bold;
+    }
+    /* Sezione Hero */
+    .hero {
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .hero img {
+      max-width: 60%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    /* Bottoni in stile Apple */
+    .btn {
+      border-radius: 999px;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary {
+      background-color: #0071e3;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #005bb5;
+    }
+    .btn-success {
+      background-color: #34c759;
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: #28a745;
+    }
+    /* Modal con bordi arrotondati */
+    .modal-content {
+      border-radius: 1rem;
+    }
+    /* Annunci: stile lista elegante */
+    .announcements .list-group-item {
+      border: none;
+      background-color: #fff;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    /* Footer semplice */
+    footer {
+      padding: 1rem 0;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+      margin-top: auto;
+    }
+  </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Medicina e Chirurgia</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" href="#">Home</a>
@@ -36,131 +107,85 @@
     </div>
   </nav>
 
+  <!-- Sezione Hero -->
+  <div class="container hero">
+    <img src="https://unimolmedicina.github.io/Unimol/medical3.png" class="img-fluid" alt="Logo">
+  </div>
+
+  <!-- Risorse -->
+  <div class="container text-center">
+    <h3>Risorse</h3>
+    <div class="my-4">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Drive materiale</button>
+    </div>
+    <div class="row justify-content-center mb-4">
+      <div class="col-6 col-md-3">
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuNf5BH5SDrdij7LirKVF-db5-hdj4i_4KZpv3JqtXqr6TsGMH4afG7cutAalO3dMVVF9PwaDwxcsT/pubhtml?gid=932249652&range=A:Z" class="btn btn-primary w-100">Calendario Lezioni</a>
+      </div>
+      <div class="col-6 col-md-3">
+        <a href="https://apistrapi.unimol.it/uploads/1452_Appelli_esame_di_gen_25_apr_26_392ba99788.pdf" class="btn btn-primary w-100">Calendario Esami 2025</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal per il Materiale -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Materiale diviso per anno</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-grid gap-2">
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1NQqtZXoCrLmjchVNXQ1Hp_3WtWtZQMQ9?usp=sharing">Anno 1°</a>
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1E7XZlfxiPps91ukoFT6xr0QI8apUmYiS?usp=sharing">Anno 2°</a>
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1lTfDwZ0PEgBx80TbhTI8OwOD-xUhBQGl?usp=sharing">Anno 3°</a>
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1pIpGElWDBwJq8TaKUqBLhraZpSIxr77X?usp=sharing">Anno 4°</a>
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/14K4XLiPuOs92gF64hIPjg8ojuzEvrPb7?usp=sharing">Anno 5°</a>
+            <a class="btn btn-primary" href="https://drive.google.com/drive/folders/17PAgQ2FUbixlQEIM1U_ePLCE7Mu24YbD?usp=sharing">Anno 6°</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Annunci -->
-
-
-      <div class="container mt-4 text-center">
-          <img src="https://unimolmedicina.github.io/Unimol/medical3.png" class="img-fluid" alt="...">
-    <div class="" role="alert">
-    </div>
-  </div>
-  <!-- Pulsanti per i link -->
-  <div class="container ">
-          <h3>Risorse</h3>
-      <div class="container mt-4  text-center">
-  <div class="row m-2">
-
-    <div class="col-6 mx-auto">
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-Drive materiale</button>    </div>
-
-</div>
-            <div class="row m-2 ">
-    <div class="col">
-      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuNf5BH5SDrdij7LirKVF-db5-hdj4i_4KZpv3JqtXqr6TsGMH4afG7cutAalO3dMVVF9PwaDwxcsT/pubhtml?gid=932249652&range=A:Z" class="btn btn-primary">Calendario Lezioni</a>
-    </div>
-    <div class="col">
-      <a href="https://apistrapi.unimol.it/uploads/1452_Appelli_esame_di_gen_25_apr_26_392ba99788.pdf" class="btn btn-primary">Calendario Esami 2025</a>
-   </div>
-
-</div>
-      </div>
-
-                        <div class="row m-2 ">
-
-    <div class="d-grip gap-3">
-   </div>
-
-</div>
-      </div>
-      <div class="container-fluid g-5 m-4">
-          <div class="container-fluid">
-<!-- Button trigger modal -->
-
-  <!-- Content here -->
-</div>
-    
-   
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Materiale diviso per anno</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="d-grid gap-2 col-6 mx-auto">
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1NQqtZXoCrLmjchVNXQ1Hp_3WtWtZQMQ9?usp=sharing" type="button">Anno 1°</a>
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1E7XZlfxiPps91ukoFT6xr0QI8apUmYiS?usp=sharing" type="button">Anno 2°</a>
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1lTfDwZ0PEgBx80TbhTI8OwOD-xUhBQGl?usp=sharing" type="button">Anno 3°</a>
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1pIpGElWDBwJq8TaKUqBLhraZpSIxr77X?usp=sharing" type="button">Anno 4°</a>
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/14K4XLiPuOs92gF64hIPjg8ojuzEvrPb7?usp=sharing" type="button">Anno 5°</a>
-  <a class="btn btn-primary" href="https://drive.google.com/drive/folders/17PAgQ2FUbixlQEIM1U_ePLCE7Mu24YbD?usp=sharing" type="button">Anno 6°</a>
-</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-      </div>
-    </div>
-  </div>
-</div>     
-        
-        
-        
-      </div>
-  </div>
-  <div class="container mt-4  bg-body-tertiary rounded-4">
-    <h4 class="m-3">Annunci</h4>
-    <div class="alert " role="alert">
-        <div id="announcements">
-  <!-- Qui verranno caricati gli annunci -->
-</div>
-
-   </div>
+  <div class="container my-4">
+    <h4 class="mb-3">Annunci</h4>
+    <div id="announcements" class="announcements"></div>
   </div>
 
-<footer class="mt-auto">
-    <div class="container">
-    <p class="text-center">Pagina in aggiornamento...
-        </p>
-    
-    </div>
-        </footer>
+  <!-- Footer -->
+  <footer>
+    <p>Pagina in aggiornamento...</p>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Funzione per caricare gli annunci dal Google Sheet
+    function loadAnnouncements() {
+      const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRkAkMNSYfpydySDk1MMH38vv4NMYqu4iQcNhQ9AOtsBgCC4rP9ep2lR4RG8zNQrACGLRxFED307k3l/pub?output=csv';
+      fetch(csvUrl)
+        .then(response => response.text())
+        .then(data => {
+          const rows = data.split('\n').slice(8, 11);
+          let announcementsHTML = '<ul class="list-group">';
+          rows.forEach(row => {
+            const columns = row.split(',');
+            if (columns[1].trim()) {
+              announcementsHTML += `<li class="list-group-item">${columns[1].trim()}</li>`;
+            }
+          });
+          announcementsHTML += '</ul>';
+          document.getElementById('announcements').innerHTML = announcementsHTML;
+        })
+        .catch(error => console.error('Errore nel caricamento degli annunci:', error));
+    }
+    window.onload = loadAnnouncements;
+  </script>
 </body>
 </html>
-
-
-
-
-<script>
-  // Funzione per caricare gli annunci dal Google Sheet
-  function loadAnnouncements() {
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRkAkMNSYfpydySDk1MMH38vv4NMYqu4iQcNhQ9AOtsBgCC4rP9ep2lR4RG8zNQrACGLRxFED307k3l/pub?output=csv';
-    
-    // Esegui la richiesta GET
-    fetch(csvUrl)
-      .then(response => response.text())
-      .then(data => {
-        const rows = data.split('\n').slice(8, 11); // Estrai le righe da B9 a B11
-        let announcementsHTML = '';
-
-        // Cicla attraverso le righe e crea il contenuto HTML
-        rows.forEach(row => {
-          const columns = row.split(',');
-          if (columns[1]) { // Controlla che la colonna B abbia un valore
-            announcementsHTML += `<div class="alert alert-primary" role="alert">${columns[1]}</div>`;
-          }
-        });
-
-        // Inserisci gli annunci nel div con id "announcements"
-        document.getElementById('announcements').innerHTML = announcementsHTML;
-      })
-      .catch(error => console.error('Errore nel caricamento degli annunci:', error));
-  }
-
-  // Carica gli annunci quando la pagina è pronta
-  window.onload = loadAnnouncements;
-</script>
-
