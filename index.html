@@ -3,301 +3,804 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
   <title>Materiale M&C</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* Font e colori di base */
+    :root {
+      --background: #f5f7fb;
+      --text: #17243b;
+      --muted: #66758b;
+      --blue: #1765e8;
+      --border: #e7ecf4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f5f5f7;
-      color: #1d1d1f;
       margin: 0;
-      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Navbar minimalista */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #1765e8;
+      outline-offset: 5px;
+    }
+
+    /* Navigazione */
     .navbar {
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
     }
 
-    .navbar-brand {
+    .nav-inner {
+      max-width: 960px;
+      min-height: 72px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 750;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background: #eaf2ff;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .feedback-link {
+      padding: 10px 13px;
+      border-radius: 12px;
+      background: #f0f4fa;
+      font-size: 13px;
       font-weight: 600;
-      font-size: 1.5rem;
+      white-space: nowrap;
     }
 
-    .nav-link {
-      font-size: 1rem;
-      margin-right: 1rem;
-      color: #0071e3;
+    /* Contenuto */
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 28px 20px 40px;
     }
 
-    .nav-link.active {
-      font-weight: bold;
-    }
-
-    /* Sezione Hero */
     .hero {
-      padding: 2rem 0;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 28px 24px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #e8f1ff, #eefaf6);
+      border: 1px solid #e0eaf7;
+      margin-bottom: 30px;
     }
 
-    .hero img {
-      max-width: 60%;
-      height: auto;
-      margin-bottom: 1rem;
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
-    /* Bottoni in stile Apple */
-    .btn {
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 11px;
       border-radius: 999px;
-      padding: 0.5rem 1.5rem;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+      color: #315c90;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
     }
 
-    .btn-primary {
-      background-color: #0071e3;
+    h1 {
+      margin: 17px 0 10px;
+      font-size: clamp(30px, 6vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -1.4px;
+    }
+
+    .hero p {
+      max-width: 390px;
+      margin: 0;
+      color: #566a83;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .hero-logo {
+      display: block;
+      max-width: 210px;
+      max-height: 125px;
+      width: 70%;
+      object-fit: contain;
+      margin: 24px auto 0;
+    }
+
+    .section-heading {
+      margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 5px;
+      font-size: 21px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Schede risorse */
+    .resources {
+      display: grid;
+      gap: 12px;
+    }
+
+    .resource-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(25, 45, 80, 0.035);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .resource-card:active {
+      transform: scale(0.98);
+    }
+
+    .resource-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .icon-green {
+      background: #e5f7ed;
+    }
+
+    .icon-blue {
+      background: #eaf2ff;
+    }
+
+    .icon-purple {
+      background: #f1eaff;
+    }
+
+    .icon-orange {
+      background: #fff1e3;
+    }
+
+    .resource-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .resource-title {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .resource-description {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .resource-arrow {
+      color: #8795aa;
+      font-size: 23px;
+      flex-shrink: 0;
+    }
+
+    .material-card {
+      background: linear-gradient(120deg, #1765e8, #3983f5);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .material-card .resource-icon {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .material-card .resource-description,
+    .material-card .resource-arrow {
+      color: #e2edff;
+    }
+
+    /* Stili annunci conservati per una futura riattivazione */
+    .announcements-section {
+      margin-top: 32px;
+    }
+
+    .announcements-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .announcement {
+      padding: 17px 18px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      white-space: pre-line;
+    }
+
+    .status-message {
+      margin: 0;
+      padding: 18px;
+      color: var(--muted);
+      border: 1px dashed #d5deec;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Finestra materiale */
+    dialog {
+      width: calc(100% - 28px);
+      max-width: 460px;
+      max-height: calc(100dvh - 40px);
+      padding: 0;
       border: none;
+      border-radius: 26px;
+      color: var(--text);
+      background: #fff;
+      box-shadow: 0 24px 80px rgba(15, 30, 60, 0.2);
+      overflow: auto;
     }
 
-    .btn-primary:hover {
-      background-color: #005bb5;
+    dialog::backdrop {
+      background: rgba(20, 33, 54, 0.45);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
 
-    .btn-success {
-      background-color: #34c759;
+    .modal-header {
+      padding: 24px 22px 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modal-header h2 {
+      margin: 0 0 6px;
+      font-size: 23px;
+      letter-spacing: -0.6px;
+    }
+
+    .modal-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .close-button {
+      width: 44px;
+      height: 44px;
+      padding: 0;
       border: none;
+      border-radius: 50%;
+      background: #f1f4f9;
+      color: #566780;
+      font-size: 25px;
+      flex-shrink: 0;
     }
 
-    .btn-success:hover {
-      background-color: #28a745;
+    .years-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 6px 22px 24px;
     }
 
-    /* Modal con bordi arrotondati */
-    .modal-content {
-      border-radius: 1rem;
-    }
-
-    /* Annunci */
-    .announcements .list-group-item {
-      border: none;
-      background-color: #fff;
-      margin-bottom: 0.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Footer */
-    footer {
-      padding: 1rem 0;
+    .year-card {
+      padding: 19px 12px;
+      border-radius: 18px;
+      background: #f3f7ff;
+      border: 1px solid #e5edfb;
       text-align: center;
-      background-color: #fff;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
-      margin-top: auto;
+      transition: background 0.18s ease;
+    }
+
+    .year-number {
+      display: block;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 750;
+    }
+
+    .year-label {
+      display: block;
+      margin-top: 5px;
+      color: #63738a;
+      font-size: 12px;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    footer {
+      padding: 0 55px 28px;
+      color: #8a97aa;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .lizard {
+      position: fixed;
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      right: 16px;
+      font-size: 30px;
+      pointer-events: none;
+      z-index: 10;
+      transform: rotate(-12deg);
+    }
+
+    @media (hover: hover) {
+      .resource-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 9px 24px rgba(25, 45, 80, 0.08);
+      }
+
+      .year-card:hover {
+        background: #e7efff;
+      }
+
+      .feedback-link:hover {
+        background: #e5ecf7;
+      }
+    }
+
+    @media (min-width: 700px) {
+      main {
+        padding-top: 36px;
+      }
+
+      .hero {
+        padding: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      .hero-logo {
+        width: 230px;
+        max-width: 230px;
+        max-height: 180px;
+        margin: 0;
+      }
+
+      .resources {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 360px) {
+      .nav-inner {
+        padding-inline: 14px;
+      }
+
+      .brand {
+        font-size: 14px;
+      }
+
+      .feedback-link {
+        padding: 10px;
+        font-size: 12px;
+      }
+
+      main {
+        padding-inline: 14px;
+      }
+
+      .resource-card {
+        padding: 15px;
+        gap: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
     }
   </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Medicina e Chirurgia</a>
+  <nav class="navbar" aria-label="Navigazione principale">
+    <div class="nav-inner">
+      <a class="brand" href="#" aria-label="Medicina e Chirurgia, Home">
+        <span class="brand-icon" aria-hidden="true">🩺</span>
+        <span>
+          Medicina e Chirurgia
+          <small>Università del Molise</small>
+        </span>
+      </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Apri menu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#" aria-current="page">Home</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdnTAstJUzFDHYiZSbzmZShS1dPpfI3052KG42iX4DLseanyA/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0">
-              Opinione degli Studenti
-            </a>
-          </li>
-        </ul>
-      </div>
+      <a
+        class="feedback-link"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdnTAstJUzFDHYiZSbzmZShS1dPpfI3052KG42iX4DLseanyA/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0"
+        aria-label="Opinione degli studenti">
+        Dì la tua ↗
+      </a>
     </div>
   </nav>
 
-  <!-- Sezione Hero -->
-  <div class="container hero">
-    <img
-      src="https://unimolmedicina.github.io/Unimol/medical3.png"
-      class="img-fluid"
-      alt="Logo Medicina e Chirurgia">
-  </div>
+  <main>
 
-  <!-- Risorse -->
-  <div class="container text-center">
-    <h3>Risorse</h3>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <span class="eyebrow">Il tuo spazio universitario</span>
+        <h1 id="hero-title">Meno ricerche.<br>Più studio.</h1>
+        <p>
+          Materiale, lezioni ed esami:
+          tutto quello che ti serve, in un unico posto.
+        </p>
+      </div>
 
-    <div class="my-4">
+      <img
+        class="hero-logo"
+        src="https://unimolmedicina.github.io/Unimol/medical3.png"
+        alt="Logo Medicina e Chirurgia">
+    </section>
+
+    <section aria-labelledby="resources-title">
+      <div class="section-heading">
+        <h2 id="resources-title">Accesso rapido</h2>
+        <p>Le risorse utili, sempre a portata di mano.</p>
+      </div>
+
+      <div class="resources">
+
+        <button
+          class="resource-card material-card"
+          id="open-material"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="material-dialog">
+          <span class="resource-icon" aria-hidden="true">📚</span>
+          <span class="resource-text">
+            <span class="resource-title">Drive materiale</span>
+            <span class="resource-description">
+              Trova il materiale del tuo anno
+            </span>
+          </span>
+          <span class="resource-arrow" aria-hidden="true">›</span>
+        </button>
+
+        <a
+          class="resource-card"
+          href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vT49Pun8xvCZaiCHYrINMTT9GWAPPNAkrSz6pUJCCDBHTCwqYp6XO9PoqRZ9nPNre89fHQ8PdtUNoiu/pubhtml?gid=427052439">
+          <span class="resource-icon icon-blue" aria-hidden="true">🗓️</span>
+          <span class="resource-text">
+            <span class="resource-title">Calendario lezioni</span>
+            <span class="resource-description">
+              Consulta giorni e orari
+            </span>
+          </span>
+          <span class="resource-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="resource-card"
+          href="https://apistrapi.unimol.it/uploads/1452_Appelli_esame_di_gen_26_mag_27_69ca305413.pdf">
+          <span class="resource-icon icon-purple" aria-hidden="true">📝</span>
+          <span class="resource-text">
+            <span class="resource-title">Calendario esami</span>
+            <span class="resource-description">
+              Appelli e date · 2026/27
+            </span>
+          </span>
+          <span class="resource-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="resource-card"
+          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRG3N-GTSTmF6xr7-6hpeSOLtwAJi54hD8jnaoJ3Xsg_ILk0OLc2Vu-W3cVKf57sd_L9kIWAsCaHQLw/pubhtml?gid=1080727432&amp;single=true">
+          <span class="resource-icon icon-orange" aria-hidden="true">📍</span>
+          <span class="resource-text">
+            <span class="resource-title">Aule esami</span>
+            <span class="resource-description">
+              Scopri dove si svolge il tuo esame
+            </span>
+          </span>
+          <span class="resource-arrow" aria-hidden="true">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!--
+    ANNUNCI DISATTIVATI
+    Per riattivarli:
+    1. Rimuovere questo commento dalla sezione HTML.
+    2. Decommentare la chiamata loadAnnouncements() in fondo allo script.
+
+    <section class="announcements-section" aria-labelledby="announcements-title">
+      <div class="section-heading">
+        <h2 id="announcements-title">Annunci</h2>
+        <p>Avvisi e comunicazioni per gli studenti.</p>
+      </div>
+
+      <div id="announcements" aria-live="polite" aria-busy="true">
+        <p class="status-message">Caricamento degli annunci…</p>
+      </div>
+    </section>
+    -->
+
+  </main>
+
+  <dialog id="material-dialog" aria-labelledby="material-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="material-title">Il tuo materiale 📚</h2>
+        <p>Scegli l'anno di corso per aprire il Drive.</p>
+      </div>
+
       <button
+        class="close-button"
+        id="close-material"
         type="button"
-        class="btn btn-success"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
-        Drive materiale
+        aria-label="Chiudi">
+        ×
       </button>
     </div>
 
-    <div class="row justify-content-center g-3 mb-4">
-      <div class="col-12 col-md-4">
-        <a
-          href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vT49Pun8xvCZaiCHYrINMTT9GWAPPNAkrSz6pUJCCDBHTCwqYp6XO9PoqRZ9nPNre89fHQ8PdtUNoiu/pubhtml?gid=427052439"
-          class="btn btn-primary w-100">
-          Calendario Lezioni
-        </a>
-      </div>
+    <div class="years-grid">
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/1NQqtZXoCrLmjchVNXQ1Hp_3WtWtZQMQ9?usp=sharing">
+        <span class="year-number">1°</span>
+        <span class="year-label">Primo anno</span>
+      </a>
 
-      <div class="col-12 col-md-4">
-        <a
-          href="https://apistrapi.unimol.it/uploads/1452_Appelli_esame_di_gen_26_mag_27_69ca305413.pdf"
-          class="btn btn-primary w-100">
-          Calendario Esami 2026/27
-        </a>
-      </div>
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/1E7XZlfxiPps91ukoFT6xr0QI8apUmYiS?usp=sharing">
+        <span class="year-number">2°</span>
+        <span class="year-label">Secondo anno</span>
+      </a>
 
-      <div class="col-12 col-md-4">
-        <a
-          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRG3N-GTSTmF6xr7-6hpeSOLtwAJi54hD8jnaoJ3Xsg_ILk0OLc2Vu-W3cVKf57sd_L9kIWAsCaHQLw/pubhtml?gid=1080727432&amp;single=true"
-          class="btn btn-primary w-100">
-          Aule Esami
-        </a>
-      </div>
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/1lTfDwZ0PEgBx80TbhTI8OwOD-xUhBQGl?usp=sharing">
+        <span class="year-number">3°</span>
+        <span class="year-label">Terzo anno</span>
+      </a>
+
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/1pIpGElWDBwJq8TaKUqBLhraZpSIxr77X?usp=sharing">
+        <span class="year-number">4°</span>
+        <span class="year-label">Quarto anno</span>
+      </a>
+
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/14K4XLiPuOs92gF64hIPjg8ojuzEvrPb7?usp=sharing">
+        <span class="year-number">5°</span>
+        <span class="year-label">Quinto anno</span>
+      </a>
+
+      <a
+        class="year-card"
+        href="https://drive.google.com/drive/folders/17PAgQ2FUbixlQEIM1U_ePLCE7Mu24YbD?usp=sharing">
+        <span class="year-number">6°</span>
+        <span class="year-label">Sesto anno</span>
+      </a>
     </div>
-  </div>
+  </dialog>
 
-  <!-- Modal per il Materiale -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Materiale diviso per anno
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Chiudi">
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="d-grid gap-2">
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/1NQqtZXoCrLmjchVNXQ1Hp_3WtWtZQMQ9?usp=sharing">
-              Anno 1°
-            </a>
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/1E7XZlfxiPps91ukoFT6xr0QI8apUmYiS?usp=sharing">
-              Anno 2°
-            </a>
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/1lTfDwZ0PEgBx80TbhTI8OwOD-xUhBQGl?usp=sharing">
-              Anno 3°
-            </a>
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/1pIpGElWDBwJq8TaKUqBLhraZpSIxr77X?usp=sharing">
-              Anno 4°
-            </a>
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/14K4XLiPuOs92gF64hIPjg8ojuzEvrPb7?usp=sharing">
-              Anno 5°
-            </a>
-            <a
-              class="btn btn-primary"
-              href="https://drive.google.com/drive/folders/17PAgQ2FUbixlQEIM1U_ePLCE7Mu24YbD?usp=sharing">
-              Anno 6°
-            </a>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal">
-            Chiudi
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Annunci -->
-  <div class="container my-4">
-    <h4 class="mb-3">Annunci</h4>
-    <div id="announcements" class="announcements"></div>
-  </div>
-
-  <!-- Footer -->
   <footer>
-    <p></p>
+    Medicina e Chirurgia · Università del Molise
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <div class="lizard" aria-hidden="true">🦎</div>
 
   <script>
-    // Funzione per caricare gli annunci dal Google Sheet
-    function loadAnnouncements() {
-      const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRkAkMNSYfpydySDk1MMH38vv4NMYqu4iQcNhQ9AOtsBgCC4rP9ep2lR4RG8zNQrACGLRxFED307k3l/pub?output=csv';
+    // Apertura e chiusura della finestra materiale
+    const materialDialog = document.getElementById('material-dialog');
+    const openMaterialButton = document.getElementById('open-material');
 
-      fetch(csvUrl)
-        .then(response => response.text())
-        .then(data => {
-          const rows = data.split('\n').slice(8, 11);
-          const list = document.createElement('ul');
-          list.className = 'list-group';
+    openMaterialButton.addEventListener('click', () => {
+      materialDialog.showModal();
+      document.body.classList.add('modal-open');
+    });
 
-          rows.forEach(row => {
-            const columns = row.split(',');
-            const announcement = (columns[1] || '').trim();
+    document.getElementById('close-material').addEventListener('click', () => {
+      materialDialog.close();
+    });
 
-            if (announcement) {
-              const item = document.createElement('li');
-              item.className = 'list-group-item';
-              item.textContent = announcement;
-              list.appendChild(item);
-            }
-          });
+    materialDialog.addEventListener('close', () => {
+      document.body.classList.remove('modal-open');
+      openMaterialButton.focus();
+    });
 
-          document.getElementById('announcements').replaceChildren(list);
-        })
-        .catch(error => {
-          console.error('Errore nel caricamento degli annunci:', error);
-        });
+    // Chiude la finestra quando si tocca lo sfondo esterno
+    materialDialog.addEventListener('click', event => {
+      if (event.target !== materialDialog) return;
+
+      const rect = materialDialog.getBoundingClientRect();
+      const outside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+
+      if (outside) materialDialog.close();
+    });
+
+    // Funzioni annunci conservate per una futura riattivazione.
+    // Nessuna richiesta viene eseguita finché loadAnnouncements() è commentata.
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let field = '';
+      let quoted = false;
+
+      text = text.replace(/^\uFEFF/, '');
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+
+        if (char === '"') {
+          if (quoted && text[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            quoted = !quoted;
+          }
+        } else if (char === ',' && !quoted) {
+          row.push(field);
+          field = '';
+        } else if ((char === '\n' || char === '\r') && !quoted) {
+          if (char === '\r' && text[i + 1] === '\n') i++;
+          row.push(field);
+          rows.push(row);
+          row = [];
+          field = '';
+        } else {
+          field += char;
+        }
+      }
+
+      if (field.length || row.length) {
+        row.push(field);
+        rows.push(row);
+      }
+
+      return rows;
     }
 
-    window.onload = loadAnnouncements;
+    async function loadAnnouncements() {
+      const container = document.getElementById('announcements');
+
+      if (!container) return;
+
+      const csvUrl =
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRkAkMNSYfpydySDk1MMH38vv4NMYqu4iQcNhQ9AOtsBgCC4rP9ep2lR4RG8zNQrACGLRxFED307k3l/pub?output=csv';
+
+      try {
+        const response = await fetch(csvUrl);
+
+        if (!response.ok) {
+          throw new Error('Caricamento non riuscito');
+        }
+
+        const data = await response.text();
+
+        // Come nel file originale: colonna B, righe 9–11
+        const announcements = parseCSV(data)
+          .slice(8, 11)
+          .map(row => (row[1] || '').trim())
+          .filter(Boolean);
+
+        if (!announcements.length) {
+          showStatus('Nessun annuncio al momento.');
+          return;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'announcements-list';
+
+        announcements.forEach(text => {
+          const item = document.createElement('li');
+          item.className = 'announcement';
+          item.textContent = text;
+          list.appendChild(item);
+        });
+
+        container.replaceChildren(list);
+      } catch (error) {
+        showStatus(
+          'Non è stato possibile caricare gli annunci. Riprova più tardi.'
+        );
+        console.error('Errore nel caricamento degli annunci:', error);
+      } finally {
+        container.setAttribute('aria-busy', 'false');
+      }
+
+      function showStatus(message) {
+        const paragraph = document.createElement('p');
+        paragraph.className = 'status-message';
+        paragraph.textContent = message;
+        container.replaceChildren(paragraph);
+      }
+    }
+
+    // ANNUNCI DISATTIVATI: decommentare insieme alla sezione HTML.
+    // loadAnnouncements();
   </script>
 
 </body>
