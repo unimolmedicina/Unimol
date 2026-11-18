@@ -393,14 +393,58 @@
       font-size: 12px;
     }
 
-    .lizard {
+    /* Piccolo easter egg: lucertola + Stitch in pixel art */
+    .lizard-easter-egg {
       position: fixed;
-      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-      right: 16px;
-      font-size: 10px;
-      pointer-events: none;
+      bottom: calc(2px + env(safe-area-inset-bottom, 0px));
+      right: 4px;
       z-index: 10;
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+    }
+
+    .lizard {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      font-size: 15px;
+      line-height: 1;
+      pointer-events: auto;
+    }
+
+    .lizard span {
+      display: block;
       transform: rotate(-12deg);
+      transition: transform 0.15s ease;
+    }
+
+    .lizard:active span {
+      transform: rotate(-12deg) scale(0.85);
+    }
+
+    .stitch-sprite {
+      position: absolute;
+      bottom: 40px;
+      right: 0;
+      width: 60px;
+      height: 45px;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px) scale(0.75);
+      transform-origin: bottom right;
+      transition: opacity 0.16s ease, transform 0.18s ease;
+    }
+
+    .stitch-sprite.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     @media (hover: hover) {
@@ -664,10 +708,54 @@
     Medicina e Chirurgia · Università del Molise
   </footer>
 
-  <div class="lizard" aria-hidden="true"></div>
+  <div class="lizard-easter-egg">
+    <button class="lizard" id="lizard-button" type="button"
+      aria-label="Mostra la sorpresa">
+      <span aria-hidden="true">🦎</span>
+    </button>
+
+    <svg class="stitch-sprite" id="stitch-sprite" viewBox="0 0 40 30"
+      xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"
+      aria-hidden="true" focusable="false">
+      <!-- Orecchie, contorno e ciuffo -->
+      <path fill="#193451" d="M1 3H5V4H9V6H12V8H15V6H17V4H19V2H21V5H23V3H25V7H28V8H30V6H33V4H36V3H39V5H40V14H38V18H35V21H32V25H29V27H25V28H15V27H11V25H8V21H5V18H2V14H0V5H1Z"/>
+      <path fill="#2d83d4" d="M2 5H5V6H8V8H11V10H14V15H12V20H9V19H6V16H4V13H2Z M38 5H35V6H32V8H29V10H26V15H28V20H31V19H34V16H36V13H38Z"/>
+      <!-- Interno rosa delle orecchie -->
+      <path fill="#e49ab8" d="M3 7H5V8H8V10H11V13H12V16H10V18H8V16H6V13H4V10H3Z M37 7H35V8H32V10H29V13H28V16H30V18H32V16H34V13H36V10H37Z"/>
+      <path fill="#b96c9e" d="M4 8H6V10H9V12H11V16H9V14H7V12H5V10H4Z M36 8H34V10H31V12H29V16H31V14H33V12H35V10H36Z"/>
+      <!-- Testa blu e ciuffo -->
+      <path fill="#327fd0" d="M16 8H18V6H20V4H21V7H23V5H24V8H27V9H29V11H31V14H33V21H31V24H28V26H24V27H16V26H12V24H9V21H7V14H9V11H11V9H16Z"/>
+      <path fill="#225da9" d="M7 16H9V21H11V24H14V26H16V27H24V26H27V24H30V21H32V16H33V21H31V24H28V26H24V27H16V26H12V24H9V21H7Z"/>
+      <path fill="#60b4ed" d="M13 10H17V8H20V10H25V9H27V11H29V13H25V12H15V13H11V12H13Z"/>
+      <!-- Macchie chiare intorno agli occhi -->
+      <path fill="#88d1f5" d="M11 13H15V14H17V16H18V21H16V23H11V22H9V20H8V17H9V15H11Z M29 13H25V14H23V16H22V21H24V23H29V22H31V20H32V17H31V15H29Z"/>
+      <!-- Occhi neri con riflesso -->
+      <path fill="#102038" d="M12 15H15V16H16V18H17V20H16V21H12V20H11V19H10V17H11V16H12Z M28 15H25V16H24V18H23V20H24V21H28V20H29V19H30V17H29V16H28Z"/>
+      <path fill="#f1fbff" d="M12 16H14V18H12Z M26 16H28V18H26Z"/>
+      <!-- Musetto, nasone e sorriso -->
+      <path fill="#65b7eb" d="M16 20H24V22H28V24H25V25H15V24H12V22H16Z"/>
+      <path fill="#15365e" d="M18 17H22V18H24V21H23V22H21V23H19V22H17V21H16V18H18Z"/>
+      <path fill="#376ba4" d="M18 18H22V19H18Z"/>
+      <path fill="#193451" d="M15 23H17V24H23V23H25V25H23V26H17V25H15Z"/>
+      <path fill="#eafaff" d="M17 24H19V25H17Z M21 24H23V25H21Z"/>
+    </svg>
+  </div>
 
   
   <script>
+    // Easter egg: Stitch appare per due secondi a ogni clic o tap.
+    const lizardButton = document.getElementById('lizard-button');
+    const stitchSprite = document.getElementById('stitch-sprite');
+    let stitchTimer;
+
+    lizardButton.addEventListener('click', () => {
+      clearTimeout(stitchTimer);
+      stitchSprite.classList.add('is-visible');
+      stitchTimer = setTimeout(() => {
+        stitchSprite.classList.remove('is-visible');
+      }, 2000);
+    });
+
     // Apertura e chiusura della finestra materiale
     const materialDialog = document.getElementById('material-dialog');
     const openMaterialButton = document.getElementById('open-material');
